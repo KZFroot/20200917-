@@ -1,0 +1,22 @@
+latex网址
+https://latex.91maths.com/mb/?JTVDc3VtXyU3QmklM0QxJTdEJTVFJTdCbiU3RCU3QihYX2klMjAtJTIwJTVDb3ZlcmxpbmUlN0JYJTdEKSU1RTIlN0Q=
+
+
+\Delta y_i = y_i'-y_i
+\\
+\mu =\frac{1}{n}\sum_{i=1}^{n}(y'_i-y_i)
+\\
+\sigma =\frac{1}{n}\sum_{i=1}^{n}(\Delta y_i - \mu )^2
+\\
+access_value = var(\frac{\Delta y-\mu }{\sigma})
+
+
+
+
+Q_1 = Quantile_{0.25}（x_{i-T},x_{i-2T},...,x_{i-nT}）(T为周期)
+\\
+Q_3 = Quantile_{0.75}（x_{i-T},x_{i-2T},...,x_{i-nT}）(T为周期)
+\\
+Low\_quantile = Q_1 - 1.2*(Q_3 - Q_1)
+\\
+Hight\_quantile = Q_3 + 1.2*(Q_3 - Q_1)
