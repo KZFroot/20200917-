@@ -9,10 +9,12 @@ f1 = open('一级能开业务量.csv')
 f2 = open('统一接口平台业务量.csv')
 f3 = open('统一支付_在线扣费业务.csv')
 f4 = open('统一支付_支付业务.csv')
+f5 = open('一级能开业务量.csv')
 data1 = pd.read_csv(f1)
 data2 = pd.read_csv(f2)
 data3 = pd.read_csv(f3)
 data4 = pd.read_csv(f4)
+data6 = pd.read_csv(f5)
 
 data5 = pd.read_excel('PBOSS.xlsx')
 
@@ -66,17 +68,23 @@ def Warningfun_main(s_q, inv_t=48):
 
 
 def model(df):
-    print(df)
+    # 获取最后一列  业务量
     D_series = df.iloc[:, -1]
-    print(D_series)
     low_quantile, high_quantile = Warningfun_main(D_series)
     df['low_quantile'] = low_quantile
     df['high_quantile'] = high_quantile
     return df
 
 # 线上预测
-def model_predict(df,inv_t,num):
+if __name__ == '__main__':
 
+ def model_predict(df):
+    # 获取业务量数据
+    D_df = df.iloc[:, -1]
+    # print(D_df)
+    low_quantile, high_quantile = Warningfun_main(D_df)
+    df['low_quantile'] = low_quantile
+    df['high_quantile'] = high_quantile
     return df
 
 
@@ -131,6 +139,11 @@ data4 = std_avg_to(data4[['接收第三方渠道交易量', 'low_quantile', 'hig
 data5 = data5[['轮次', '总业务量']]
 data5 = model(data5)
 data5 = std_avg_to(data5[['总业务量', 'low_quantile', 'high_quantile']])
+
+# 测试数据
+data6 = data6[['日期', '时间', '业务量']]
+data6 = model_predict(data6)
+data6 = std_avg_to()
 
 #  计算差值波动方差
 std_1 = std_avg(data1[['业务量', 'low_quantile', 'high_quantile']])
